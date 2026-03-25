@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGEA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sistema.css') }}">
+</head>
+<body>
+
+
+<div class="layout">
+
+        {% if mostrar_sidebar %}
+        <aside class="sidebar">
+            <div class="logo">SGEA</div>
+            <nav class="menu">
+                <a href="/panel">Inicio</a>
+                <a href="/inventario">Inventario</a>
+                <a href="#">Ventas</a>
+            </nav>
+        </aside>
+        {% endif %}
+
+    <main class="contenido">
+        {% block contenido %}{% endblock %}
+    </main>
+
+</div>
+
+</body>
+</html>

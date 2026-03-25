@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h2>Inicio de sesión</h2>
+
+        <form method="POST">
+
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="password" name="contrasena" placeholder="Contraseña" required>
+
+            <div class="login-acciones">
+                <label>
+                    <input type="checkbox" name="recuerdame">
+                    Recuérdame
+                </label>
+
+                <button type="submit">Acceder</button>
+            </div>
+
+        </form>
+
+        <div class="login-extra">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+            <span>No tienes cuenta? <a href="/registro">Crear cuenta</a></span>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<div class="panel">
+
+    <div class="panel-header">
+        <h2>Inventario</h2>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="grid-productos">
+            {% for producto in productos %}
+            <div class="card">
+                <span class="sku">{{ producto.codigo_sku }}</span>
+                <h3>{{ producto.descripcion }}</h3>
+                <div class="precio">$ {{ producto.precio_venta_base }}</div>
+                <div class="stock">Stock: {{ producto.stock_actual }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

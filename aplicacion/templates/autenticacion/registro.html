@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h2>Crear cuenta</h2>
+
+        <form method="POST">
+
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <input type="password" name="contrasena" placeholder="Contraseña" required>
+
+            <div class="login-acciones">
+                <label>
+                    <input type="checkbox" required>
+                    Acepto los términos
+                </label>
+
+                <button type="submit">Registrarse</button>
+            </div>
+
+        </form>
+
+        <div class="login-extra">
+            <span>¿Ya tienes cuenta? <a href="/login">Iniciar sesión</a></span>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
