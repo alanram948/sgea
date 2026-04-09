@@ -2,6 +2,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
+from flask import session
 
 # Cargar variables del .env
 load_dotenv()
@@ -24,3 +25,14 @@ SesionLocal = sessionmaker(autocommit=False, autoflush=False, bind=motor)
 # Obtener sesión
 def obtener_sesion():
     return SesionLocal()
+def obtener_modulos():
+    modulos=session.get("modulos")
+    if not modulos:
+        return {
+            "ventas": False,
+            "inventario": False,
+            "produccion": False,
+            "finanzas": False
+        }
+
+    return modulos

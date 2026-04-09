@@ -1,0 +1,33 @@
+# -----------------------------
+# Variables de Entorno y Secretos
+# -----------------------------
+.env
+.flaskenv
+
+# -----------------------------
+# Entornos Virtuales
+# -----------------------------
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# -----------------------------
+# Archivos compilados de Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# -----------------------------
+# Archivos de Sistema Operativo e IDEs
+# -----------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+
+

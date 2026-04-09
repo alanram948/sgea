@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="login-wrapper">
+    <div class="login-card" style="max-width: 700px;">
+        <h2 style="text-align: center; color: var(--acento);">Perfil de la Empresa</h2>
+        <p style="text-align: center; color: var(--subtexto); margin-bottom: 25px;">
+            Responde este breve cuestionario. Nuestra IA analizará tus respuestas para ensamblar tu SGEA.
+        </p>
+
+        <form action="/cuestionario" method="POST" class="form-cuestionario">
+            
+            <div class="form-row-2">
+                <div class="grupo">
+                    <label>Nombre de la Empresa</label>
+                    <input type="text" name="nombre_empresa" placeholder="Ej. Paletería La Michoacana" required autofocus>
+                </div>
+                <div class="grupo">
+                    <label>1. ¿Cuál es el giro principal?</label>
+                    <input type="text" name="q1_giro" placeholder="Ej. Heladería, Ferretería, Textil" required>
+                </div>
+            </div>
+
+            <div class="grupo">
+                <label>2. ¿Qué ofreces a tus clientes?</label>
+                <select name="q2_tipo_venta" required>
+                    <option value="">Selecciona una opción...</option>
+                    <option value="Solo productos físicos">Solo productos físicos</option>
+                    <option value="Solo servicios">Solo servicios</option>
+                    <option value="Productos físicos y servicios">Productos físicos y servicios</option>
+                </select>
+            </div>
+
+            <div class="grupo">
+                <label>3. ¿De dónde provienen tus productos?</label>
+                <select name="q3_origen" required>
+                    <option value="">Selecciona una opción...</option>
+                    <option value="Compro productos ya hechos a proveedores y los revendo">Los compro a proveedores y revendo</option>
+                    <option value="Compro materia prima y nosotros fabricamos el producto final">Compro materia prima y los fabricamos nosotros</option>
+                    <option value="No aplica (Solo ofrezco servicios)">No aplica (Solo servicios)</option>
+                </select>
+            </div>
+
+            <div class="form-row-2">
+                <div class="grupo">
+                    <label>4. ¿Manejas inventario que caduca?</label>
+                    <select name="q4_caducidad" required>
+                        <option value="Sí, es vital controlar lotes y fechas de caducidad">Sí, control estricto de caducidad</option>
+                        <option value="No, mis productos no caducan">No, no tienen caducidad</option>
+                        <option value="No manejo inventario físico">No manejo inventario</option>
+                    </select>
+                </div>
+                <div class="grupo">
+                    <label>5. ¿Tienes maquinaria o vehículos?</label>
+                    <select name="q5_mantenimiento" required>
+                        <option value="Sí, tenemos maquinaria/vehículos que requieren mantenimiento constante">Sí, requieren mantenimiento</option>
+                        <option value="No tenemos equipo que requiera mantenimiento">No, no es necesario</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grupo">
+                <label>6. (Opcional) ¿Algún otro detalle clave de tu operación?</label>
+                <textarea name="q6_extra" rows="2" placeholder="Ej. Tenemos 3 camionetas repartidoras..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-principal btn-block" style="margin-top: 20px;">
+                Generar mi Sistema con IA 
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
 {% block contenido %}
-
+<script>
+    setTimeout(function() {
+        window.location.href = "/inicio";
+    }, 3000); // 3000 ms = 3 segundos
+</script>
 <div class="vista-centro">
     <h1>Bienvenido</h1>
     <p>Sistema de Gestión Empresarial</p>
+
 </div>
 
 {% endblock %}

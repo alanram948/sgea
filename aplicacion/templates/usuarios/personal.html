@@ -1,0 +1,27 @@
+{% extends "base.html"%}
+
+{% block contenido %}
+
+    <div class="panel">
+
+        <div class="panel-header">
+            <h2>Personal</h2>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="grid-productos">
+                {% for usuario in usuarios_bd %}
+                    <div class="card">
+                        <span class="sku">{{ usuario.Rol.nombre_rol }}</span>
+                        <h3>{{ usuario.Usuario.nombre_completo }}</h3>
+                        <div class="precio">$ {{ usuario.Usuario.salario_mensual }}</div>
+                        <div class="stock">Email: {{ usuario.Usuario.email }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a  href="{{ url_for('usuarios.nuevo_empleado') }}"><button class="btn-agregar">Crear usuario</button></a>
+
+        </div>
+    </div>
+{% endblock %}

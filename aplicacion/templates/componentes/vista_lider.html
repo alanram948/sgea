@@ -1,0 +1,82 @@
+<div class="panel" style="padding: 20px;">
+    
+    <div class="panel-header" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">
+        <h2 style="color: var(--texto); margin: 0;"> Hola Jefe, {{ session.nombre_empresa }}</h2>
+        <p style="color: var(--subtexto); margin-top: 5px;">Resumen financiero y operativo.</p>
+    </div>
+
+    <div class="panel-body">
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+            
+            <div class="card" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border-left: 5px solid #10B981;">
+                <div style="color: var(--subtexto); font-size: 0.9rem;">Ventas de Hoy</div>
+                <h2 style="font-size: 2rem; margin: 10px 0; color: #fff;">$ {{ ventas_hoy | default('0.00') }}</h2>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border-left: 5px solid #3B82F6;">
+                <div style="color: var(--subtexto); font-size: 0.9rem;">Tickets Emitidos</div>
+                <h2 style="font-size: 2rem; margin: 10px 0; color: #fff;">{{ tickets_hoy | default('0') }}</h2>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border-left: 5px solid #EF4444;">
+                <div style="color: var(--subtexto); font-size: 0.9rem;">Alertas Stock</div>
+                <h2 style="font-size: 2rem; margin: 10px 0; color: #fff;">{{ productos_criticos | default('0') }}</h2>
+            </div>
+        </div>
+
+        <div class="card" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; width: 100%; box-sizing: border-box;">
+            <h3 style="margin-top: 0; margin-bottom: 20px; color: #fff;">Tendencia de Ventas (Últimos 7 días)</h3>
+            
+            <div style="position: relative; height: 350px; width: 100%;">
+                <canvas id="graficaVentas"></canvas>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('graficaVentas').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'line', 
+            data: {
+                labels: {{ fechas_grafica | tojson | safe }}, 
+                datasets: [{
+                    label: 'Ingresos Diarios ($)',
+                    data: {{ ventas_grafica | tojson | safe }},
+                    borderColor: '#3B82F6', 
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)', 
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#3B82F6',
+                    pointRadius: 5,
+                    tension: 0.4, 
+                    fill: true 
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false } 
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true, 
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#a0aec0' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#a0aec0' }
+                    }
+                }
+            }
+        });
+    });
+</script>

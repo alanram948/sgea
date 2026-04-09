@@ -1,0 +1,47 @@
+<script>
+function toggleSidebar() {
+    document.querySelector(".sidebar").classList.toggle("collapsed");
+}
+</script>
+
+<div class="sidebar">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    
+    <nav class="menu">
+        <a href="{{ url_for('inicio') }}" class="texto_side">
+            <span class="texto_side">Inicio</span>
+        </a>
+
+        {% if session.get('modulos', {}).get('ventas') %}
+        <a href="{{ url_for('erp.ventas') }}" class="elemento_side"> 
+            <span class="texto_side">Ventas</span>
+        </a>
+        {% endif %}
+
+        {% if session.get('modulos', {}).get('compras') %}
+        <a href="{{ url_for('compras.inicio') }}" class="elemento_side">
+            <span class="texto_side">Compras</span>
+        </a>
+        {% endif %}
+
+        {% if session.get('modulos', {}).get('inventario') %}
+        <a href="{{ url_for('inventario.inventario') }}" class="elemento_side">
+            <span class="texto_side">Inventario</span>
+        </a>
+        {% endif %}
+
+        {% if session.get('modulos', {}).get('produccion') %}
+        <a href="{{ url_for('produccion.produccion') }}" class="elemento_side">
+            <span class="texto_side">Producción</span>
+        </a>
+        {% endif %}
+
+        {% if session.rol == 'LIDER' %}
+            <a href="{{ url_for('usuarios.personal') }}">Personal / RRHH</a>
+            <a href="/configuracion">Ajustes</a>
+        {% endif %}
+
+        <a href="{{ url_for('autenticacion.login') }}" class="exit" >Salir</a>
+    </nav>
+
+</div>

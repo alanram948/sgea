@@ -24,3 +24,6 @@ from .compras.solicitudes import SolicitudMaterial
 
 # Auditoría
 from .auditoria.movimientos import Auditoria
+
+#cuestionario
+from .nucleo.usuarios import ConfiguracionEmpresa

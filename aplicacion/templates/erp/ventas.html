@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<script src="{{ url_for('static', filename='js/pos.js') }}"></script>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; height: 100%; width: 100%;">
+    
+    <div class="panel">
+        <div class="panel-header" style="display: flex; gap: 15px;">
+            <input type="text" id="buscador" class="buscador" placeholder="🔍 Buscar producto por nombre o SKU..." onkeyup="filtrar()">
+            <button class="btn-secundario">Escanear</button>
+        </div>
+        <div class="panel-body">
+            <div class="grid-productos">
+                {% for producto in productos %}
+                    
+                    <div class="card" onclick="mostrar_menu(this)">
+                        <span class="sku" >{{ producto.codigo_sku }}</span>
+                        <h3 class="nombre" >{{ producto.descripcion }}</h3>
+                        <div class="precio">$ {{ producto.precio_venta_base }}</div>
+                        <div class="stock">Stock: {{ producto.stock_actual }}</div>
+
+                        <div class="mini-menu" style="display: none;" onclick="event.stopPropagation()">
+                            <input type="number" value="1" min="1" max="{{ producto.stock_actual }}" class="cantidad-input">
+                            
+                            <button class="btn-principal" style="padding: 8px 12px; margin: 0;" onclick="agregarALaCuenta('{{ producto.id_articulo }}', '{{ producto.descripcion }}', '{{ producto.stock_actual }}', this)">Añadir</button>
+                        </div>  
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="background-color: var(--fondo);">
+        <div class="panel-header">
+            <h2>Ticket Actual</h2>
+            <span class="subtitulo-panel">Cajero: Ventas</span>
+        </div>
+        <div class="panel-body" style="display: flex; flex-direction: column;">
+            <ul id="items-cuenta">
+
+            </ul>
+            <div id="total-cuenta" class="total-cuenta" style="display: flex; justify-content: space-between; font-size: 1.5rem; color: var(--acento); font-weight: bold;">
+                
+            </div>
+
+            <button type="button" id="btn-cobrar" class="btn-principal btn-block" style="margin-top: 20px; font-size: 1.2rem; padding: 18px;" onclick="procesarVenta()">Cobrar e Imprimir</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
