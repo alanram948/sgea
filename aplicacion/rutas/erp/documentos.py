@@ -16,8 +16,6 @@ def ventas():
     
     config = session.get("modulos", {})
     usuario_rol = session.get("rol")
-    if not config.get("ventas") or usuario_rol != "VENTAS":
-        return "No autorizado"
     productos=obtener_inventario()
     return render_template("erp/ventas.html", productos=productos, mostrar_sidebar=True)
 

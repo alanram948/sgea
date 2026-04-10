@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from aplicacion.servicios.servicio_autenticacion import validar_usuario, registrar_usuario, marcar_configuracion_completa, buscar_lider
+from aplicacion.servicios.servicio_autenticacion import validar_usuario, registrar_usuario, marcar_configuracion_completa, buscar_lider, obtener_modulos_lider
 from aplicacion.servicios.servicio_ia import bd_ia, obtener_modulos_por_rol, predecir_modulos_con_ia, sembrar_catalogos_iniciales
 from aplicacion.modelos.nucleo.usuarios import ConfiguracionEmpresa
 from aplicacion.extensiones.base_datos import obtener_sesion
 from werkzeug.security import generate_password_hash
+
 autenticacion_bp = Blueprint('autenticacion', __name__)
 
 @autenticacion_bp.route("/login", methods=["GET", "POST"])
@@ -21,9 +22,7 @@ def login():
 
             # --- CONTROL DE MÓDULOS ---
             if rol_usuario == "LIDER":
-                sesion_bd = obtener_sesion()
-                config = sesion_bd.query(ConfiguracionEmpresa).filter_by(id_usuario=usuario["Id"]).first()
-                sesion_bd.close()
+                config=obtener_modulos_lider(session["usuario_id"])
                 
                 if config and config.modulos_activados:
                     lista_modulos = config.modulos_activados.split(',')

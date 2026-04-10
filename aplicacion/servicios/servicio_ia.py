@@ -59,20 +59,31 @@ def obtener_modulos_por_rol(rol):
         "proyectos": False, "finanzas": False, "rrhh": False
     }
     
-    mapa_roles = {
-        "VENTAS": {"ventas": True},
-        "COMPRAS": {"compras": True, "inventario": True},
-        "ALMACEN": {"inventario": True},
-        "PRODUCCION": {"produccion": True, "inventario": True},
-        "MANTENIMIENTO": {"mantenimiento": True},
-        "PROYECTOS": {"proyectos": True},
-        "FINANZAS": {"finanzas": True, "ventas": True, "compras": True},
-        "RRHH": {"rrhh": True}
-    }
     
-    permisos_rol = mapa_roles.get(rol.upper(), {})
-    modulos_base.update(permisos_rol)
+    rol_limpio = rol.upper().strip()
     
+    
+    if "VENTA" in rol_limpio or "CAJERO" in rol_limpio or "TIENDA" in rol_limpio:
+        modulos_base["ventas"] = True
+        
+    
+    if "ALMACEN" in rol_limpio or "ALMACÉN" in rol_limpio:
+        modulos_base["inventario"] = True
+        
+    
+    if "PRODUCCION" in rol_limpio or "PRODUCCIÓN" in rol_limpio or "OPERARIO" in rol_limpio or "CALIDAD" in rol_limpio:
+        modulos_base["produccion"] = True
+        modulos_base["inventario"] = True 
+        
+   
+    if "COMPRA" in rol_limpio:
+        modulos_base["compras"] = True
+        modulos_base["inventario"] = True 
+        
+    
+    if "MANTENIMIENTO" in rol_limpio:
+        modulos_base["mantenimiento"] = True
+        
     return modulos_base
 
 

@@ -1,5 +1,5 @@
 from aplicacion.extensiones.base_datos import obtener_sesion
-from aplicacion.modelos.nucleo.usuarios import Usuario
+from aplicacion.modelos.nucleo.usuarios import Usuario, ConfiguracionEmpresa
 from aplicacion.modelos.nucleo.areas import Area
 from aplicacion.modelos.nucleo.roles import Rol
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -13,13 +13,17 @@ def validar_usuario(email, contrasena):
         if usuario and check_password_hash(usuario.password, contrasena):
             rol=sesion.query(Rol).filter(usuario.id_rol==Rol.id_rol).first()
             usuario_data={"Id":usuario.id_usuario, "Rol":rol.nombre_rol}
-            sesion.close()
+            
             return usuario_data
         return None
     finally:    
         sesion.close()
     
-
+def obtener_modulos_lider(id):
+    sesion_bd = obtener_sesion()
+    config = sesion_bd.query(ConfiguracionEmpresa).filter_by(id_usuario=id).first()
+    sesion_bd.close()
+    return config
 
 def registrar_usuario(nombre, email, contrasena, rol_nombre):
     sesion = obtener_sesion()

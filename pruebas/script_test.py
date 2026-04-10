@@ -175,3 +175,4 @@ def inyectar_dummies_paleteria():
     sesion.commit()
     sesion.close()
     return "Dummies inyectados con éxito"
+

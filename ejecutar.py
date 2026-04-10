@@ -15,7 +15,7 @@ from aplicacion.servicios.servicio_autenticacion import verificar_configuracion
 from aplicacion.servicios.servicio_erp import obtener_nombre
 import os
 from aplicacion.servicios.servicio_dashboard import obtener_ventas_semanal
-from pruebas.script_test import inyectar_dummies_paleteria
+#from pruebas.script_test import inyectar_dummies_paleteria
 load_dotenv()
 #inyectar_dummies_paleteria()
 app = Flask(__name__, template_folder="aplicacion/templates", static_folder="aplicacion/static")
